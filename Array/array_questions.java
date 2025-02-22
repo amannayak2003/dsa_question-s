@@ -82,4 +82,13 @@ public class array_questions {
         }
         return max_profit;
     }
+
+    public int singleNumber(int[] arr) {
+        int num = arr[0];
+        for(int i = 1 ;i<arr.length;i++){
+            // xor 
+            num = num^arr[i];
+        }
+        return num;
+    }
 }
