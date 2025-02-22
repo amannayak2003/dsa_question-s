@@ -91,4 +91,18 @@ public class array_questions {
         }
         return num;
     }
+
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 0) return 0; // Edge case: Empty array
+        
+        int max = nums[0];  // Initialize with first element
+        int count = nums[0]; // Start with first element
+        
+        for (int i = 1; i < nums.length; i++) {
+            count = Math.max(nums[i], count + nums[i]); // Continue or start new subarray
+            max = Math.max(max, count); // Update max if needed
+        }
+        
+        return max;
+    }
 }
