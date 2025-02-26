@@ -124,4 +124,64 @@ public class array_questions {
 
         return ans;
     }
+
+    public void sortColors(int[] nums) {
+       int low = 0; int mid = 0; int high = nums.length-1;
+       while(mid<=high){
+           if(nums[mid]==0){
+               int temp = nums[low];
+               nums[low] = nums[mid];
+               nums[mid] = temp;
+               low++;
+               mid++;
+           }
+           else if(nums[mid]==1){
+            mid++;
+           }
+           else{
+               int temp = nums[mid];
+               nums[mid] = nums[high];
+               nums[high] = temp;
+               high--;
+           }
+       }
+    }
+
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int r = matrix.length;
+        int c = matrix[0].length;
+        
+        int low = 0, high = r - 1, row = -1;
+        
+        // Step 1: Binary Search to Find the Correct Row
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (matrix[mid][0] <= target && matrix[mid][c - 1] >= target) {
+                row = mid;
+                break;
+            } else if (matrix[mid][c - 1] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        // If row is not found, target is not present
+        if (row == -1) return false;
+
+        // Step 2: Binary Search Within the Found Row
+        int low2 = 0, high2 = c - 1;
+        while (low2 <= high2) {
+            int mid2 = (low2 + high2) / 2;
+            if (matrix[row][mid2] == target) {
+                return true;
+            } else if (matrix[row][mid2] < target) {
+                low2 = mid2 + 1;
+            } else {
+                high2 = mid2 - 1;
+            }
+        }
+
+        return false;
+    }
 }
